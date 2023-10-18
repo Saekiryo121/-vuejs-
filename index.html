@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>社員情報システムの機能作成</title>
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+    </head>
+    <body>
+        <div id="app">
+            <table>
+                <tr>
+                    <th>ID名</th>
+                    <th>名前</th>
+                    <th>会社名</th>
+                    <th>部署</th>
+                    <th>役職</th>
+                </tr>
+                <tr v-for="user in products" :key="user.id">
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.name }}</td>
+                    <td>{{ user.company }}</td>
+                    <td>{{ user.division }}</td>
+                    <td>{{ user.title }}</td>
+                </tr>
+            </table>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/vue@3.2.37/dist/vue.global.js"></script>
+        <script src="vue.js"></script>
+    </body>
+</html>
