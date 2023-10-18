@@ -8,6 +8,11 @@
     </head>
     <body>
         <div id="app">
+            <label for="sortText">並び替え:</label>
+            <select id="sort" v-model="selectedSort" v-on:change="sortTable">
+                <option value="up">昇順</option>
+                <option value="down">降順</option>
+            </select>
             <table>
                 <tr>
                     <th>ID名</th>
