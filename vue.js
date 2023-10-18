@@ -2,6 +2,8 @@ Vue.createApp({
   data: function() {
     return {
       selectedSort: 'up',
+      selectSort: 'id',
+      searchKeyword: '',
       products: []
     };
   },
@@ -17,7 +19,7 @@ Vue.createApp({
         });
       }
     }
-  },  
+  },
   created: async function () {
       let res = await fetch('./package.json');
       let items = await res.json();

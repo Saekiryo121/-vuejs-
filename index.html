@@ -13,6 +13,17 @@
                 <option value="up">昇順</option>
                 <option value="down">降順</option>
             </select>
+            <label for="sortText">並び替え:</label>
+            <select id="sortSort" v-model="selectSort">
+                <option value="id">ID</option>
+                <option value="name">名前</option>
+                <option value="company">会社名</option>
+                <option value="division">部署</option>
+                <option value="title">役職</option>
+            </select>
+            <label for="searchText">検索:</label>
+            <input type="text" id="searchText" v-model="searchKeyword">
+            <button v-on:click="search">検索</button>
             <table>
                 <tr>
                     <th>ID名</th>
