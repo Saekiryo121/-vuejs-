@@ -12,7 +12,7 @@ table,tr,td,th {
 }
 
 table {
-  margin: 100px auto;
+  margin: 50px auto;
   width: 80%;
 }
 
@@ -23,4 +23,13 @@ td,th {
 th {
   background-color: #90bcff;
   color: #fff;
+}
+
+.box-width {
+  width: 80%;
+  margin: 50px auto;
+}
+
+.margin {
+  margin-left: 20px;
 }
