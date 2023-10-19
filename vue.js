@@ -5,20 +5,31 @@ Vue.createApp({
       selectSort: "id",
       searchKeyword: "",
       products: [],
-      allProducts: []
+      allProducts: [],
+      selectedSortKey: "id",
+      sortDirection: 1,
     };
   },
   methods: {
-    sortTable: function () {
-      if (this.selectedSort === "up") {
-        this.products.sort(function (a, b) {
-          return a.id - b.id;
-        });
-      } else if (this.selectedSort === "down") {
-        this.products.sort(function (a, b) {
-          return b.id - a.id;
-        });
+   
+    customSortFunction: function (key) {
+      if (this.selectedSortKey === key) {
+        this.sortDirection *= -1;
+      } else {
+        this.selectedSortKey = key;
+        this.sortDirection = 1;
       }
+
+      console.log("Selected Sort Key:", key);
+      console.log("Sort Direction:", this.sortDirection);
+
+      this.products.sort((a, b) => {
+        let aValue = a[this.selectedSortKey];
+        let bValue = b[this.selectedSortKey];
+        let sortFactor = this.sortDirection;
+
+        return sortFactor * aValue.localeCompare(bValue, "ja");
+      });
     },
     sortTables: function () {
       if (this.selectedSort === "id") {
@@ -57,7 +68,7 @@ Vue.createApp({
           );
         });
       }
-    }
+    },
   },
   created: async function () {
     let res = await fetch("./package.json");
