@@ -5,6 +5,7 @@ Vue.createApp({
       selectSort: "id",
       searchKeyword: "",
       products: [],
+      allProducts: []
     };
   },
   methods: {
@@ -45,9 +46,9 @@ Vue.createApp({
     search: function () {
       let keyword = this.searchKeyword.toLowerCase();
       if (keyword === "") {
-        this.products = this.products;
+        this.products = this.allProducts;
       } else {
-        this.products = this.products.filter(function (product) {
+        this.products = this.allProducts.filter(function (product) {
           return (
             product.name.toLowerCase().includes(keyword) ||
             product.company.toLowerCase().includes(keyword) ||
@@ -56,11 +57,12 @@ Vue.createApp({
           );
         });
       }
-    },
+    }
   },
   created: async function () {
     let res = await fetch("./package.json");
     let items = await res.json();
     this.products = items;
+    this.allProducts = items;
   },
 }).mount("#app");
