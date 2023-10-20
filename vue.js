@@ -8,16 +8,16 @@ Vue.createApp({
       allProducts: [],
       selectedSortKey: "name",
       sortDirection: 1,
-    };
+    }
   },
   methods: {
     sortTable: function () {
       if (this.selectedSort === "up") {
-        this.products.sort(function (a, b) {
+        this.products.sort((a, b) => {
           return a.id - b.id;
         });
       } else if (this.selectedSort === "down") {
-        this.products.sort(function (a, b) {
+        this.products.sort((a, b) => {
           return b.id - a.id;
         });
       }
@@ -46,21 +46,28 @@ Vue.createApp({
       if (keyword === "") {
         this.products = this.allProducts;
       } else {
-        this.products = this.allProducts.filter(function (product) {
-          return (
-            product.name.toLowerCase().includes(keyword) ||
-            product.company.toLowerCase().includes(keyword) ||
-            product.division.toLowerCase().includes(keyword) ||
-            product.title.toLowerCase().includes(keyword)
-          );
+        this.products = this.allProducts.filter((product) => {
+          if (this.selectSort === 'id' && product.id.toString().toLowerCase().includes(keyword)) {
+            return true;
+          } else if (this.selectSort === 'name' && product.name.toLowerCase().includes(keyword)) {
+            return true;
+          } else if (this.selectSort === 'company' && product.company.toLowerCase().includes(keyword)) {
+            return true;
+          } else if (this.selectSort === 'division' && product.division.toLowerCase().includes(keyword)) {
+            return true;
+          } else if (this.selectSort === 'title' && product.title.toLowerCase().includes(keyword)) {
+            return true;
+          } else {
+            return false;
+          }
         });
       }
-    },
-  },
+    }
+},
   created: async function () {
     let res = await fetch("./package.json");
     let items = await res.json();
     this.products = items;
     this.allProducts = items;
-  },
+  }
 }).mount("#app");
