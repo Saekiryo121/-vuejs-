@@ -32,34 +32,15 @@ Vue.createApp({
     this.products.sort((a, b) => {
       let aValue = key === 'id' ? Number(a[key]) : a[key].toLowerCase();
       let bValue = key === 'id' ? Number(b[key]) : b[key].toLowerCase();
+      console.log(aValue)
       let sortFactor = this.sortDirection;
+      if (key === 'id') {
+        return sortFactor * (aValue - bValue);
+      }
 
       return sortFactor * aValue.localeCompare(bValue, 'ja');
     })
   },
-    sortTables: function () {
-      if (this.selectedSort === "id") {
-        this.products.sort(function (a, b) {
-          return a.id - b.id;
-        });
-      } else if (this.selectedSort === "name") {
-        this.products.sort(function (a, b) {
-          return a.name.localeCompare(b.name);
-        });
-      } else if (this.selectedSort === "company") {
-        this.products.sort(function (a, b) {
-          return a.company.localeCompare(b.company);
-        });
-      } else if (this.selectedSort === "division") {
-        this.products.sort(function (a, b) {
-          return a.division.localeCompare(b.division);
-        });
-      } else if (this.selectedSort === "title") {
-        this.products.sort(function (a, b) {
-          return a.title.localeCompare(b.title);
-        });
-      }
-    },
     search: function () {
       let keyword = this.searchKeyword.toLowerCase();
       if (keyword === "") {
