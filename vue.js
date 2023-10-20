@@ -18,6 +18,7 @@ Vue.createApp({
       }
     }
   },  
+  
   created: async function () {
       let res = await fetch('./package.json');
       let items = await res.json();
