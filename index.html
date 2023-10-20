@@ -25,7 +25,7 @@
                 <label for="searchText" class="margin">検索:</label>
                 <input type="text" id="searchText" v-model="searchKeyword">
                 <button v-on:click="search">検索</button>
-                <form class="marginTop">
+                <div class="marginTop">
                     <label for="name">名前:</label>
                     <input type="text" id="name" v-model="newUserInfo.name">
                     <label for="company">会社名:</label>
@@ -35,7 +35,8 @@
                     <label for="title">役職:</label>
                     <input type="text" id="title" v-model="newUserInfo.title">
                     <button v-on:click="addNewUser">作成</button>
-                </form>
+                </div>
+                <p class="error-message">{{ errorMessage }}</p>
             </div>
             <table>
                 <tr>

@@ -14,8 +14,9 @@ Vue.createApp({
         company: "",
         division: "",
         title: ""
-      }
-    };
+      },
+      errorMessage: ""
+    }
   },
   methods: {
     sortTable: function () {
@@ -85,12 +86,28 @@ Vue.createApp({
         });
       }
     },
-    addNewUser() {
-      if (this.newUserInfo.name) {
-        let maxId = Math.max(...this.products.map(user => user.id));
+    addNewUser: function () {
+      let nonJapaneseRegex = /^[ぁ-んァ-ン一-龠ａ-ｚＡ-Ｚｦ-ﾟ\s]*$/;
+      if (
+        nonJapaneseRegex.test(this.newUserInfo.name) &&
+        nonJapaneseRegex.test(this.newUserInfo.company) &&
+        nonJapaneseRegex.test(this.newUserInfo.division) &&
+        nonJapaneseRegex.test(this.newUserInfo.title)
+      ) {
+        let maxId = Math.max(...this.products.map((user) => user.id));
         this.newUserInfo.id = maxId + 1;
-        this.products.push({ ...this.newUserInfo });
+        let newProduct = {
+          id: this.newUserInfo.id,
+          name: this.newUserInfo.name,
+          company: this.newUserInfo.company,
+          division: this.newUserInfo.division,
+          title: this.newUserInfo.title,
+        };
+        this.products.push(newProduct);
         this.clearForm();
+        this.errorMessage = "";
+      } else {
+        this.errorMessage = "名前、会社名、部署、役職のすべてを日本語で入力してください";
       }
     },
     clearForm() {
