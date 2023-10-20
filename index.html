@@ -8,18 +8,31 @@
     </head>
     <body>
         <div id="app">
-            <label for="sortText">並び替え:</label>
-            <select id="sort" v-model="selectedSort" v-on:change="sortTable">
-                <option value="up">昇順</option>
-                <option value="down">降順</option>
-            </select>
+            <div class="box-width">
+                <label for="sortText">並び替え:</label>
+                <select id="sort" v-model="selectedSort" v-on:change="sortTable">
+                    <option value="up">昇順</option>
+                    <option value="down">降順</option>
+                </select>
+                <label for="sortText" class="margin">選択:</label>
+                <select id="sortSort" v-model="selectSort">
+                    <option value="id">ID</option>
+                    <option value="name">名前</option>
+                    <option value="company">会社名</option>
+                    <option value="division">部署</option>
+                    <option value="title">役職</option>
+                </select>
+                <label for="searchText" class="margin">検索:</label>
+                <input type="text" id="searchText" v-model="searchKeyword">
+                <button v-on:click="search">検索</button>
+            </div>
             <table>
                 <tr>
-                    <th>ID名</th>
-                    <th>名前</th>
-                    <th>会社名</th>
-                    <th>部署</th>
-                    <th>役職</th>
+                    <th v-on:click="customSortFunction('id')">ID名</th>
+                    <th v-on:click="customSortFunction('name')">名前</th>
+                    <th v-on:click="customSortFunction('company')">会社名</th>
+                    <th v-on:click="customSortFunction('division')">部署</th>
+                    <th v-on:click="customSortFunction('title')">役職</th>
                 </tr>
                 <tr v-for="user in products" :key="user.id">
                     <td>{{ user.id }}</td>
