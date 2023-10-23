@@ -33,3 +33,11 @@ th {
 .margin {
   margin-left: 20px;
 }
+
+.marginTop {
+  margin-top: 50px;
+}
+
+.error-message {
+  color: red;
+}
